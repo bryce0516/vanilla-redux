@@ -56,7 +56,7 @@ function Home({toDos, addToDo}){
 
   return(
 
-    <>
+    <div className="container">
       <h1 className="center blue-text text-darken-2">To Do</h1>
 
       <form className="center" onSubmit={onSubmit}>
@@ -83,7 +83,7 @@ function Home({toDos, addToDo}){
         <input type="text" onChange={handleChange}/>
         <button className="waves-effect waves-light btn-small">Submit</button>
       </form>
-    </>
+    </div>
   )
 }
 

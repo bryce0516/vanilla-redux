@@ -19,7 +19,7 @@ export default function Ext() {
 
   console.log(desc)
   return (
-    <div>
+    <div className="container">
       <h3>it's Ext</h3>
       <ul> 
       {todoList
