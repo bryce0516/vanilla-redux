@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState,useRef } from 'react';
 import times from 'lodash/times';
 import useMoveTile from '../hooks/useMoveTile';
 import { getInitialTileList } from '../util/tile';
@@ -7,12 +7,13 @@ import Tile from './Tile';
 
 export default function InGame({ setScore }) {
   const [tileList, setTileList] = useState(getInitialTileList);
-  useMoveTile({ tileList, setTileList, setScore });
+  const gameRef = useRef();
+  useMoveTile({ tileList, setTileList, setScore, gameRef });
 
 
   return (
     <div className="game-container" >
-      <div className="grid-container" onClick={() => window.onscroll=function(){}}>
+      <div className="grid-container" onClick={() => window.onscroll=function(){}} ref={gameRef}>
         {times(MAX_POS, y => (
           <div key={y} className="grid-row">
             {times(MAX_POS, x => (

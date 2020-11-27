@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { makeTile, moveTile } from '../util/tile';
 import { addKeyCallback, removeKeyCallback } from '../util/keyboard';
 
-export default function useMoveTile({ tileList, setTileList, setScore}) {
+export default function useMoveTile({ tileList, setTileList, setScore, gameRef}) {
   useEffect(() => {
+    gameRef.current.focus()
     function moveAndAdd({ x, y }) {
       const newTileList = moveTile({ tileList, x, y });
       const score = newTileList.reduce(
