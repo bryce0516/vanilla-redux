@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import store from "./store"
 import {createStore} from 'redux'
 import rootReducer from "./reducers/rootReducer";
-// import commonStore from './common/store'
+import commonStore from './common/store'
 // import {
 //   addTimeLine,
 //   removeTimeLine,
@@ -18,7 +18,7 @@ import rootReducer from "./reducers/rootReducer";
 const store2 = createStore(rootReducer);
 
 ReactDOM.render(
-  <Provider store={store, store2}>
+  <Provider store={store, store2, commonStore}>
     <App />
   </Provider>
 , document.getElementById("root"));

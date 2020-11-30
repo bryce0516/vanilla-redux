@@ -1,31 +1,62 @@
-import createReducer from '../common/createReducer';
+import { createReducer, createSetValueAction, setValueReducer } from "../common/redux-helper";
+import trySetText from './saga'
 
-const ADD = 'timeline/ADD'
-const REMOVE = 'timeline/REMOVE'
-const EDIT = 'timeline/EDIT'
-const INCREASE_NEXT_PAGE = 'timeline/INCREASE_NEXT_PAGE'
+export const types = {
+  ADD: "timeline/ADD",
+  REMOVE: "timeline/REMOVE",
+  EDIT: "timeline/EDIT",
+  INCREASE_NEXT_PAGE: "timeline/INCREASE_NEXT_PAGE",
+  REQUEST_LIKE: "timeline/REQUEST_LIKE",
+  ADD_LIKE: "timeline/ADD_LIKE",
+  SET_LOADING: "timeline/SET_LOADING",
+  SET_VALUE: 'timeline/SET_VALUE',
+  TRY_SET_TEXT: 'timeline/TRY_SET_TEXT'
+};
 
-export const addTimeLine = timeline => ({ type:ADD, timeline})
-export const removeTimeLine = timeline => ({ type:REMOVE, timeline})
-export const editTimeLine = timeline => ({ type:EDIT, timeline})
-export const increaseNextPage = () => ({ type:INCREASE_NEXT_PAGE})
+export const actions = {
+  addTimeLine: (timeline) => ({ type: types.ADD, timeline }),
+  removeTimeLine: (timeline) => ({ type: types.REMOVE, timeline }),
+  editTimeLine: (timeline) => ({ type: types.EDIT, timeline }),
+  increaseNextPage: () => ({ type: types.INCREASE_NEXT_PAGE }),
+  requestLike: (timeline) => ({ type: types.REQUEST_LIKE, timeline }),
+  addLike: (timelineId, value) => ({ type: types.ADD_LIKE, timelineId, value }),
+  setLoading: (isLoading) => ({
+    type: types.SET_LOADING,
+    isLoading,
+  }),
+  setValue: createSetValueAction(types.SET_VALUE),
+  trySetText: (text) => ({
+    type: types.TRY_SET_TEXT,
+    text,
+  })
+};
 
-const INITIAL_STATE = { timelines: [], nextPage:0 }
+const INITIAL_STATE = { timelines: [], nextPage: 0, isLoading: false, error:'', text:'' };
 const reducer = createReducer(INITIAL_STATE, {
-  [ADD]: (state, action) => state.timelines.push(action.timeline),
-  [REMOVE]:(state, action) => (
-    state.timelines === state.timelines.filter(
-      timeline => timeline.id !== action.timeline.id,
-    )),
-  [EDIT]: (state, action) => {
+  [types.ADD]: (state, action) => state.timelines.push(action.timeline),
+  [types.REMOVE]: (state, action) =>
+    state.timelines ===
+    state.timelines.filter((timeline) => timeline.id !== action.timeline.id),
+  [types.EDIT]: (state, action) => {
     const index = state.timelines.findIndex(
-      timeline => timeline.id === action.timeline.id,
-    )
-    if(index >= 0){
-      state.timelines[index] = action.timeline
+      (timeline) => timeline.id === action.timeline.id
+    );
+    if (index >= 0) {
+      state.timelines[index] = action.timeline;
     }
   },
-  [INCREASE_NEXT_PAGE]: (state, action) => (state.nextPage += 1),
-})
+  [types.INCREASE_NEXT_PAGE]: (state, action) => (state.nextPage += 1),
+  [types.ADD_LIKE]: (state, action) => {
+    const timeline = state.timelines.find(
+      (item) => item.id === action.timelineId
+    );
+    if (timeline) {
+      timeline.likes += action.value;
+    }
+  },
+  [types.SET_LOADING]: (state, action) => (state.isLoading = action.isLoading),
+  [types.SET_VALUE]: setValueReducer,
+  // [types.TRY_SET_TEXT] : (state,action) => (state.text = action.text)
+});
 
-export default reducer
+export default reducer;
