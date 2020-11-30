@@ -1,5 +1,4 @@
 import { createReducer, createSetValueAction, setValueReducer } from "../common/redux-helper";
-import trySetText from './saga'
 
 export const types = {
   ADD: "timeline/ADD",
@@ -35,8 +34,7 @@ const INITIAL_STATE = { timelines: [], nextPage: 0, isLoading: false, error:'', 
 const reducer = createReducer(INITIAL_STATE, {
   [types.ADD]: (state, action) => state.timelines.push(action.timeline),
   [types.REMOVE]: (state, action) =>
-    state.timelines ===
-    state.timelines.filter((timeline) => timeline.id !== action.timeline.id),
+    state.timelines === state.timelines.filter((timeline) => timeline.id !== action.timeline.id),
   [types.EDIT]: (state, action) => {
     const index = state.timelines.findIndex(
       (timeline) => timeline.id === action.timeline.id
@@ -56,7 +54,7 @@ const reducer = createReducer(INITIAL_STATE, {
   },
   [types.SET_LOADING]: (state, action) => (state.isLoading = action.isLoading),
   [types.SET_VALUE]: setValueReducer,
-  // [types.TRY_SET_TEXT] : (state,action) => (state.text = action.text)
+
 });
 
 export default reducer;

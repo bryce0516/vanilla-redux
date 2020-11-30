@@ -2,12 +2,14 @@ import {createStore, combineReducers, compose, applyMiddleware} from 'redux'
 import timelineReducer from '../timeline/state'
 import timelineSaga from '../timeline/saga'
 import friendReducer from '../friend/state'
+import calendarReducer from '../calendar/state'
 import  createSageMiddleware  from 'redux-saga'
 import { all } from 'redux-saga/effects'
 
 const reducer = combineReducers({
   timeline:timelineReducer,
-  friend: friendReducer
+  friend: friendReducer,
+  calendar:calendarReducer,
 })
 
 // const store = createStore(reducer,  window.__REDUX_DEVTOOLS_EXTENSION__?.());

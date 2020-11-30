@@ -12,6 +12,8 @@ import reduxPost from '../routes/reduxPost'
 import Ext from '../routes/Ext'
 import User from '../routes/User'
 import Game from '../routes/Game'
+import Calendar from "../routes/Calendar";
+
 function App() {
   return (
     <BrowserRouter>
@@ -29,6 +31,7 @@ function App() {
           <Route path="/reduxs/:post_id" component={reduxPost}></Route>
           <Route path="/User" component={User}></Route>
           <Route path="/Game" component={Game}></Route>
+          <Route path="/Calendar" component={Calendar}></Route>
         </Switch>
       </div>
     </BrowserRouter>
