@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer} from 'react'
+import React from 'react'
 import store from '../../common/store'
 import {getNextFriend} from '../../common/mockData'
 // import { addFriend, setAgeLimit, setShowLimit, setValue } from '../state'

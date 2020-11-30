@@ -1,4 +1,4 @@
-import React, { useState,useRef } from "react";
+import React, { useState} from "react";
 import Profile from "../components/Profile";
 import WidthPrinter from "../components/WidthPrinter";
 import BoxList from '../components/BoxList';

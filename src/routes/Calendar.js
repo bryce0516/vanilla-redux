@@ -1,10 +1,10 @@
-import React,{useState} from 'react'
+import React from 'react'
 import CalendarFrame from '../calendar/container/CalendarFrame'
-import { useSelector,useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import useCalendar from '../calendar/hooks/useCalendar'
 export default function Calendar() {
   const { calendarRows, selectedDate, todayFormatted, days, monthNames, getNextMonth, getPrevMonth} = useCalendar();
-  
+
   const dispatch = useDispatch();
 
   return (

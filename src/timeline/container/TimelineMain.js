@@ -1,7 +1,6 @@
-import React, {useEffect, useReducer,useState} from 'react'
-import store from '../../common/store'
+import React, {useState} from 'react'
 import {getNextTimeline} from '../../common/mockData'
-import { actions, types } from '../state'
+import { actions } from '../state'
 import TimelineList from '../component/TimelineList';
 import { useSelector, useDispatch } from 'react-redux';
 

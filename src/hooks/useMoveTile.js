@@ -41,5 +41,5 @@ export default function useMoveTile({ tileList, setTileList, setScore, gameRef})
       removeKeyCallback('left', moveLeft);
       removeKeyCallback('right', moveRight);
     };
-  }, [tileList, setTileList, setScore]);
+  }, [tileList, setTileList, setScore, gameRef]);
 }

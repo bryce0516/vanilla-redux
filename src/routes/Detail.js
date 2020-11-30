@@ -46,7 +46,7 @@ function FuncComp(props){
     return function(){
       console.log('%cfunc => useEffect return (componentWillUnMount) '+(++funcId),funcStyle);
     }
-  }, [])
+  }, [number])
 
   useEffect(function(){
     console.log('%cfunc => useEffect number (componentDidMount & componentDidUpdate) '+(++funcId),funcStyle);
@@ -85,7 +85,6 @@ function FuncComp(props){
 }
 
 var classStyle = 'color:red'
-var classId = 0;
 
 class ClassComp extends React.Component{
   state = {

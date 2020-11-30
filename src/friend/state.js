@@ -4,8 +4,8 @@ import { MAX_AGE_LIMIT, MAX_SHOW_LIMIT } from "./common";
 const ADD = "friend/ADD";
 const REMOVE = "friend/REMOVE";
 const EDIT = "friend/EDIT";
-const SET_AGE_LIMIT = "friend/SET_AGE_LIMIT";
-const SET_SHOW_LIMIT = "friend/SET_SHOW_LIMIT";
+// const SET_AGE_LIMIT = "friend/SET_AGE_LIMIT";
+// const SET_SHOW_LIMIT = "friend/SET_SHOW_LIMIT";
 const SET_VALUE = 'friend/SET_VALUE';
 
 export const addFriend = (friend) => ({ type: ADD, friend });

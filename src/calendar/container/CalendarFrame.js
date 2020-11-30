@@ -1,8 +1,5 @@
-import React,{useState, useEffect} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import DayPicker from 'react-day-picker';
-import { times, indexOf } from 'lodash';
-
 CalendarFrame.propTypes = {
   calendarRows: PropTypes.objectOf(PropTypes.array).isRequired,
   selectedDate: PropTypes.object,
