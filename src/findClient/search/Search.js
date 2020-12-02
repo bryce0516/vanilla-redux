@@ -2,6 +2,8 @@ import React from 'react'
 import {Row, Col, Typography} from 'antd'
 import Settings from '../component/Settings'
 import SearchInput from '../component/SearchInput'
+import People from '../../routes/People'
+import 'antd/dist/antd.css';
 export default function Search() {
   return (
     <React.Fragment>
@@ -16,6 +18,7 @@ export default function Search() {
       <Row justify="center" style={{ marginTop: 50 }}>
         <Col span={12}><SearchInput /></Col>
       </Row>
+      {/* <People /> */}
     </React.Fragment>
   )
 }

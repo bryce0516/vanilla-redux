@@ -14,6 +14,7 @@ import User from '../routes/User';
 import Game from '../routes/Game';
 import Calendar from "../routes/Calendar";
 import findClient from "../routes/findClient"
+import People from "../routes/People"
 function App() {
   return (
     <BrowserRouter>
@@ -33,6 +34,7 @@ function App() {
           <Route path="/Game" component={Game}></Route>
           <Route path="/Calendar" component={Calendar}></Route>
           <Route path="/findClient" component={findClient}></Route>
+          <Route path="/People/:name" component={People}></Route>
         </Switch>
       </div>
     </BrowserRouter>

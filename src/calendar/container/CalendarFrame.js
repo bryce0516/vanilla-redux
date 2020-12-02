@@ -62,7 +62,7 @@ const containerStyle={
   display:'flex',
   alignItems:'flex-end',
   justifyContent:'center',
-  width:'75%'
+  width:'80%'
 }
 
 const cellStyle = {

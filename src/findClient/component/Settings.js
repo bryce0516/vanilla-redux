@@ -1,5 +1,5 @@
 import React from "react";
-import { Dropdown, Menu } from "antd";
+import { Dropdown, Menu, Button } from "antd";
 import { SettingOutlined } from "@ant-design/icons";
 
 /**
@@ -10,10 +10,23 @@ import { SettingOutlined } from "@ant-design/icons";
 export default function Settings({ logout }) {
   return (
     <>
-      <button className="btn" onClick={logout} style={{backgroundColor:'#bbada0'}}>
+    <Dropdown
+      overlay={
+        <Menu>
+          <Menu.Item onClick={logout}>Sign Out</Menu.Item>
+        </Menu>
+      }
+      trigger={['click']}
+      placement="bottomRight"
+    >
+      <Button shape="circle" icon={<SettingOutlined />}/>
+    </Dropdown>
+
+
+      {/* <button className="btn" onClick={logout} style={{backgroundColor:'#bbada0'}}>
         Sign Out
         <SettingOutlined />
-      </button>
+      </button> */}
     </>
   );
 }

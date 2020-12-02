@@ -7,11 +7,15 @@ import  createSageMiddleware  from 'redux-saga'
 import { all } from 'redux-saga/effects'
 import searchReducer from '../findClient/state'
 import searchSaga from '../findClient/common/saga'
+import peopleReducer from '../people/state'
+import peopleSaga from '../people/common/saga'
+
 const reducer = combineReducers({
   timeline:timelineReducer,
   friend: friendReducer,
   calendar:calendarReducer,
-  search: searchReducer
+  search: searchReducer,
+  people: peopleReducer
 })
 
 // const store = createStore(reducer,  window.__REDUX_DEVTOOLS_EXTENSION__?.());
@@ -23,7 +27,7 @@ const store = createStore(
 )
 
 function* rootSaga() {
-  yield all([timelineSaga(), searchSaga()]);
+  yield all([timelineSaga(), searchSaga(), peopleSaga()]);
 }
 
 sagaMiddleware.run(rootSaga)
