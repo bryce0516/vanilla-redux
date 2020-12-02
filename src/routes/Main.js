@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import mac from '../css/mac.jpg'
-
+import {connect } from 'react-redux'
 
 class Main extends Component {
   state = {

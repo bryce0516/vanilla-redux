@@ -8,7 +8,7 @@ const Navbar = (props) => {
         <a className="brand-logo" style={brandLogo}>Poke'Times</a>
         <ul className="right">
           <li><NavLink to="/main">Main</NavLink></li>
-          <li><NavLink to="/Redux">Redux</NavLink></li>
+          <li><NavLink to="/Admin">Admin</NavLink></li>
           <li><NavLink to="/home">Home</NavLink></li> 
           <li><NavLink to="/about">About</NavLink></li> 
           <li><NavLink to="/contact">Contact</NavLink></li>
@@ -16,6 +16,7 @@ const Navbar = (props) => {
           <li><NavLink to="/User">User</NavLink></li>
           <li><NavLink to="/Game">Game</NavLink></li> 
           <li><NavLink to="/Calendar">Calendar</NavLink></li>
+          <li><NavLink to="/findClient">findClient</NavLink></li>
         </ul>
       </div>
     </nav>
