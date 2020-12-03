@@ -9,13 +9,14 @@ import searchReducer from '../findClient/state'
 import searchSaga from '../findClient/common/saga'
 import peopleReducer from '../people/state'
 import peopleSaga from '../people/common/saga'
-
+import commonReducer from './index'
 const reducer = combineReducers({
   timeline:timelineReducer,
   friend: friendReducer,
   calendar:calendarReducer,
   search: searchReducer,
-  people: peopleReducer
+  people: peopleReducer,
+  common: commonReducer
 })
 
 // const store = createStore(reducer,  window.__REDUX_DEVTOOLS_EXTENSION__?.());

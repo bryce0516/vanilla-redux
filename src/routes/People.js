@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react'
-import { Row, Col, PageHeader, Descriptions, Typography } from 'antd'
+import { Row, Col, PageHeader, Descriptions, Typography, Space, Spin } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { actions } from '../people/state'
-import User from './User'
-
+import { actions, types } from '../people/state'
+import useFetchInfo from '../hooks/useFetchInfo'
+import Department from '../people/component/Department'
+import TagList from '../people/component/TagList'
+import History from '../people/component/History'
+import FetchLabel from '../people/component/FetchLabel'
 /**
  * 
  * @param {object} param
@@ -17,12 +20,11 @@ export default function People({ match}) {
   const history = useHistory()
   const dispatch = useDispatch()
   const people = useSelector(state => state.people.people)
-  console.log('people',people)
   useEffect (() => {
     dispatch(actions.fetchPeople(name))
-  },[name])
+  },[dispatch, name])
 
-  const isFetched = true
+  const { isFetched, isSlow } = useFetchInfo(types.FetchPeople)
 
 
   return (
@@ -30,26 +32,43 @@ export default function People({ match}) {
       <Col xs={24} md={20} lg={14}>
         <PageHeader
           onBack={history.goBack}
-          title="userInfo"
+          title={
+            <FetchLabel 
+              label="User's info"
+              actionType={types.FetchPeople}
+            />
+          }
         >
          {people && (
            <Descriptions layout="vertical" bordered column={1}>
             <Descriptions.Item label="name">
               <Typography.Text>{people.name}</Typography.Text>
             </Descriptions.Item>
-            <Descriptions.Item label="department">
-              {people.department}
+            <Descriptions.Item 
+              label={<FetchLabel 
+              label="department"
+              actionType={types.FetchUpdatePeople}
+              fetchKey="department"
+            />
+            }>
+              <Department />
             </Descriptions.Item>
-            <Descriptions.Item label="tag">
-              {people.tag}
+            <Descriptions.Item 
+              label={<FetchLabel 
+              label="tag"
+              actionType={types.FetchUpdatePeople}
+              fetchKey="tag"
+            />
+            }>
+              <TagList />
             </Descriptions.Item>
             <Descriptions.Item label="revision record">
-              revision record
+              <History />
             </Descriptions.Item>
            </Descriptions>
          )}
          {!people && isFetched && (
-           <Typography.Text>존재하지 않는 사용자입니다.</Typography.Text>
+           <Typography.Text>Sorry, Cannot match any user</Typography.Text>
          )}
         </PageHeader>
       </Col>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import Home from "../routes/Home";
 import Detail from "../routes/Detail";
@@ -16,6 +16,13 @@ import Calendar from "../routes/Calendar";
 import findClient from "../routes/findClient"
 import People from "../routes/People"
 function App() {
+
+  useEffect(() => {
+    const bodyEl = document.getElementsByTagName('body')[0];
+    const loadingEl = document.getElementById('init-loading');
+    bodyEl.removeChild(loadingEl);
+  }, []);
+  
   return (
     <BrowserRouter>
       <div className="App" style={appStyle}>

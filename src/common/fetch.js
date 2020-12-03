@@ -2,7 +2,7 @@ import { put, delay, fork, cancel, select, call } from 'redux-saga/effects';
 import lruCache from 'lru-cache';
 import { FetchStatus } from '../people/common/constant';
 import { callApi } from '../findClient/common/api';
-import { actions } from '../people/state';
+import { actions } from './index';
 import { FETCH_PAGE, FETCH_KEY } from '../common/redux-helper';
 
 function makeCheckSlowSaga(actionType, fetchKey) {
