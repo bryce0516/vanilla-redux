@@ -10,13 +10,16 @@ import searchSaga from '../findClient/common/saga'
 import peopleReducer from '../people/state'
 import peopleSaga from '../people/common/saga'
 import commonReducer from './index'
+import authReducer from '../auth/state'
+import authSaga from '../auth/common/saga'
 const reducer = combineReducers({
   timeline:timelineReducer,
   friend: friendReducer,
   calendar:calendarReducer,
   search: searchReducer,
   people: peopleReducer,
-  common: commonReducer
+  common: commonReducer,
+  auth: authReducer
 })
 
 // const store = createStore(reducer,  window.__REDUX_DEVTOOLS_EXTENSION__?.());
@@ -28,7 +31,7 @@ const store = createStore(
 )
 
 function* rootSaga() {
-  yield all([timelineSaga(), searchSaga(), peopleSaga()]);
+  yield all([timelineSaga(), searchSaga(), peopleSaga(), authSaga()]);
 }
 
 sagaMiddleware.run(rootSaga)

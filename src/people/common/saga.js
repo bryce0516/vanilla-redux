@@ -28,8 +28,19 @@ function* fetchUpdatePeople({people,key,value}){
   });
   if(isSuccess && data){
     deleteApiCache()
+    yield put(actions.addHistory(data.history))
   }else{ 
     yield put(actions.setValue('people', people))
+  }
+}
+
+function* fetchPeopleHistory({ name }){
+  const {isSuccess, data} = yield call(callApi, {
+    url:'/history',
+    params:{name},
+  });
+  if (isSuccess && data) {
+    yield put(actions.setValue('peopleHistory', data));
   }
 }
 
@@ -43,6 +54,9 @@ export default function* () {
       types.FetchUpdatePeople,
       makeFetchSaga({ fetchSaga: fetchUpdatePeople, canCache:false})
     ),
-    
+    takeLeading(
+      types.FetchPeopleHistory,
+      makeFetchSaga({ fetchSaga: fetchPeopleHistory, canCache: false})
+    ),
   ]);
 }

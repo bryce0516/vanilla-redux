@@ -1,4 +1,4 @@
-import { all, put, call, takeEvery} from 'redux-saga/effects'
+import { all, put, call, takeEvery, takeLeading} from 'redux-saga/effects'
 import { actions, types } from '../state'
 import { callApi } from './api'
 import { makeFetchSaga } from '../../common/fetch'
@@ -13,8 +13,26 @@ function* fetchAutoComplete({keyword}) {
     yield put(actions.setValue('autoCompletes', data))
   }
 }
+
+function* fetchAllHistory(_, page){
+  const { isSuccess, data } = yield call(callApi, {
+    url:'/history',
+    params: {page}
+  });
+
+  if (isSuccess && data) {
+    yield put(actions.setValue('history', data));
+  }
+}
 export default function* () {
   yield all ([
-    takeEvery(types.FetchAutoComplete, makeFetchSaga({fetchSaga: fetchAutoComplete, canCache:true}))
+    takeEvery(
+      types.FetchAutoComplete, makeFetchSaga({fetchSaga: fetchAutoComplete, canCache:true})
+    ),
+    takeLeading(
+      types.FetchAllHistory,
+      makeFetchSaga({ fetchSaga: fetchAllHistory, canCache: false}),
+    )
+
   ])
 } 

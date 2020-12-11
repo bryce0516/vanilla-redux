@@ -15,14 +15,20 @@ import Game from '../routes/Game';
 import Calendar from "../routes/Calendar";
 import findClient from "../routes/findClient"
 import People from "../routes/People"
+import Login from '../auth/component/Login'
+import Signup from '../auth/component/Signup'
+import { useDispatch } from "react-redux";
+import { actions as authActions} from '../auth/state'
 function App() {
-
+  const dispatch = useDispatch()
   useEffect(() => {
     const bodyEl = document.getElementsByTagName('body')[0];
     const loadingEl = document.getElementById('init-loading');
     bodyEl.removeChild(loadingEl);
   }, []);
-  
+  useEffect(() => {
+    dispatch(authActions.fetchUser());
+  },[dispatch])
   return (
     <BrowserRouter>
       <div className="App" style={appStyle}>
@@ -42,6 +48,8 @@ function App() {
           <Route path="/Calendar" component={Calendar}></Route>
           <Route path="/findClient" component={findClient}></Route>
           <Route path="/People/:name" component={People}></Route>
+          <Route path="/login" component={Login}></Route>
+          <Route path="/signup" component={Signup}></Route>
         </Switch>
       </div>
     </BrowserRouter>

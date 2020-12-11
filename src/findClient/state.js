@@ -1,12 +1,14 @@
 import {
   createReducer,
   createSetValueAction,
-  setValueReducer
+  setValueReducer,
+  FETCH_PAGE
 } from '../common/redux-helper'
 
 export const types = {
   SetValue: 'search/SetValue',
-  FetchAutoComplete: 'search/FetchAutoComplete'
+  FetchAutoComplete: 'search/FetchAutoComplete',
+  FetchAllHistory: 'search/FetchAllHistory'
 }
 
 export const actions = {
@@ -14,13 +16,15 @@ export const actions = {
   fetchAutoComplete: keyword => ({
     type: types.FetchAutoComplete,
     keyword
-  })
+  }),
+  fetchAllHistory: () => ({ type: types.FetchAllHistory, [FETCH_PAGE]:0 }),
 }
 
 
 const INITIAL_STATE = {
   keyword:'',
   autoCompletes: [],
+  history: [],
 }
 
 const reducer = createReducer(INITIAL_STATE, {
