@@ -2,13 +2,15 @@ import {
   createReducer,
   createSetValueAction,
   setValueReducer,
-  FETCH_PAGE
+  FETCH_PAGE,
+  totalCount
 } from '../common/redux-helper'
 
 export const types = {
   SetValue: 'search/SetValue',
   FetchAutoComplete: 'search/FetchAutoComplete',
-  FetchAllHistory: 'search/FetchAllHistory'
+  FetchAllHistory: 'search/FetchAllHistory',
+  FetchPagination: 'search/FetchPagination'
 }
 
 export const actions = {
@@ -18,6 +20,7 @@ export const actions = {
     keyword
   }),
   fetchAllHistory: () => ({ type: types.FetchAllHistory, [FETCH_PAGE]:0 }),
+  fetchPagination: () => ({ type: types.FetchPagination, totalCount })
 }
 
 
@@ -25,6 +28,7 @@ const INITIAL_STATE = {
   keyword:'',
   autoCompletes: [],
   history: [],
+  allPage: []
 }
 
 const reducer = createReducer(INITIAL_STATE, {

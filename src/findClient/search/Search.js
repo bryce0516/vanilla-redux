@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Row, Col, Typography} from 'antd'
 import Settings from '../component/Settings'
 import SearchInput from '../component/SearchInput'
@@ -10,12 +10,15 @@ import { actions } from '../state'
 import useNeedLogin from '../../hooks/useNeedLogin'
 import { actions as authActions } from '../../auth/state'
 export default function Search() {
+  const [number, setNumber] = useState(0)
   useNeedLogin();
   const history = useSelector(state => state.search.history)
+  const historyState = useSelector(state => state.search.allPage)
+  console.log('history search State',historyState)
   const dispatch = useDispatch();
-  console.log('search history :', history)
   useEffect(() => {
     dispatch(actions.fetchAllHistory())
+    dispatch(actions.fetchPagination())
   }, [])
   function logout(){
     dispatch(authActions.fetchLogout());
@@ -37,6 +40,9 @@ export default function Search() {
         <Col lg={40} md={16} xs={12} ><History items={history} /></Col>
       </Row>
       {/* <People /> */}
+      <Row justify="center" style={{ marginTop: 50 }}>
+      <Col lg={40} md={16} xs={12} >this is page numbers</Col>
+      </Row>
     </React.Fragment>
   )
 }

@@ -19,11 +19,23 @@ function* fetchAllHistory(_, page){
     url:'/history',
     params: {page}
   });
-
   if (isSuccess && data) {
     yield put(actions.setValue('history', data));
   }
 }
+
+function* fetchPagination(_){
+  
+  const {isSuccess, data} = yield call(callApi, {
+    url:'/history',
+
+  })
+  console.log("pagination saga", data, _)
+  if (isSuccess && data) {
+    yield put(actions.setValue('allPage', data));
+  }
+}
+
 export default function* () {
   yield all ([
     takeEvery(
@@ -32,6 +44,11 @@ export default function* () {
     takeLeading(
       types.FetchAllHistory,
       makeFetchSaga({ fetchSaga: fetchAllHistory, canCache: false}),
+    ),
+    takeLeading(
+      types.FetchPagination,
+      makeFetchSaga({ fetchSaga: fetchPagination, canCache: false, })
+      
     )
 
   ])

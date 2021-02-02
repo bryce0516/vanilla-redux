@@ -32,6 +32,7 @@ export function makeFetchSaga({
   canCache,
   getTotalCount = res => res?.totalCount,
 }) {
+
   return function* (action) {
     const { type: actionType } = action;
     const fetchPage = action[FETCH_PAGE];
@@ -47,6 +48,7 @@ export function makeFetchSaga({
     let params;
     while (true) {
       const { value, done } = iter.next(res);
+      console.log('makeFetchSaga value', value)
       if (getIsCallEffect(value) && getIsGeneratorFunction(value.payload.fn)) {
         iterStack.push(iter);
         iter = value.payload.fn(...value.payload.args);
@@ -90,7 +92,7 @@ export function makeFetchSaga({
             totalCount,
             nextPage: isSuccess ? page + 1 : page,
             errorMessage: isSuccess ? '' : apiResult.resultMessage,
-          };
+          }
         }
       } else if (value !== undefined) {
         res = yield value;
@@ -113,6 +115,7 @@ export function makeFetchSaga({
 
 // 쿼리 파라미터 순서가 바뀌어도 같은 key가 나오도록 키 이름으로 정렬한다
 export function getApiCacheKey(actionType, { apiHost, url, params }) {
+  console.log('getApiCacheKey ===>', actionType,apiHost,url,params )
   const prefix = `${actionType}_${apiHost ? apiHost + url : url}`;
   const keys = params ? Object.keys(params) : [];
   if (keys.length) {
