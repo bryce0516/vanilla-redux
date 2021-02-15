@@ -12,6 +12,7 @@ import peopleSaga from '../people/common/saga'
 import commonReducer from './index'
 import authReducer from '../auth/state'
 import authSaga from '../auth/common/saga'
+
 const reducer = combineReducers({
   timeline:timelineReducer,
   friend: friendReducer,
